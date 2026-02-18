@@ -225,15 +225,18 @@ frontend:
 
   - task: "WhatsApp and Call Integration"
     implemented: true
-    working: "NA"
+    working: true
     file: "app/page.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: "NA"
         -agent: "main"
         -comment: "WhatsApp link with pre-filled message (+91 9876543210), click-to-call functionality, floating buttons. Need to test link generation and button clicks."
+        -working: true
+        -agent: "testing"
+        -comment: "✅ WORKING PERFECTLY. WhatsApp button in hero section works correctly with proper link (wa.me/919876543210) and pre-filled message. Opens in new tab (_blank target). Call button has correct tel:+919876543210 link. Floating WhatsApp and Call buttons (bottom right) both functional with correct hrefs. Header Book Now button correctly links to phone number. All 5 call-related buttons and 1 WhatsApp button working as expected."
 
   - task: "Testimonials and FAQ Sections"
     implemented: true
