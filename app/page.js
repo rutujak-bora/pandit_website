@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Phone, Mail, MapPin, Star, CheckCircle2, Calendar, Users, Award, Heart, MessageCircle } from 'lucide-react'
+import Link from 'next/link'
 
 const services = [
   {
