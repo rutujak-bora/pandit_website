@@ -14,49 +14,57 @@ const services = [
     title: 'Wedding Puja',
     description: 'Complete Vedic wedding ceremonies with traditional rituals',
     image: 'https://images.pexels.com/photos/36053876/pexels-photo-36053876.jpeg',
-    icon: '💑'
+    icon: '💑',
+    slug: 'wedding-puja'
   },
   {
     title: 'Griha Pravesh',
     description: 'Housewarming ceremonies for new home blessings',
     image: 'https://images.pexels.com/photos/7152003/pexels-photo-7152003.jpeg',
-    icon: '🏠'
+    icon: '🏠',
+    slug: 'griha-pravesh'
   },
   {
     title: 'Navratri Puja',
     description: 'Nine-day Durga puja with kalash sthapana',
     image: 'https://images.pexels.com/photos/34473107/pexels-photo-34473107.jpeg',
-    icon: '🪔'
+    icon: '🪔',
+    slug: 'navratri-puja'
   },
   {
     title: 'Ganesh Puja',
     description: 'Ganpati sthapana and puja for auspicious beginnings',
     image: 'https://images.pexels.com/photos/33829504/pexels-photo-33829504.jpeg',
-    icon: '🙏'
+    icon: '🙏',
+    slug: 'ganesh-puja'
   },
   {
     title: 'Satyanarayan Katha',
     description: 'Sacred katha for prosperity and peace',
     image: 'https://images.pexels.com/photos/8751531/pexels-photo-8751531.jpeg',
-    icon: '📿'
+    icon: '📿',
+    slug: 'satyanarayan-katha'
   },
   {
     title: 'Naamkaran Sanskar',
     description: 'Traditional baby naming ceremony',
     image: 'https://images.pexels.com/photos/35204633/pexels-photo-35204633.jpeg',
-    icon: '👶'
+    icon: '👶',
+    slug: 'naamkaran-sanskar'
   },
   {
     title: 'Vastu Shanti',
     description: 'Vastu correction and peace rituals',
     image: 'https://images.pexels.com/photos/6315702/pexels-photo-6315702.jpeg',
-    icon: '🧭'
+    icon: '🧭',
+    slug: 'vastu-shanti'
   },
   {
     title: 'Pitru Paksha Shraddh',
     description: 'Ancestral offerings and tarpan rituals',
     image: 'https://images.pexels.com/photos/34753111/pexels-photo-34753111.jpeg',
-    icon: '🕉️'
+    icon: '🕉️',
+    slug: 'pitru-paksha-shraddh'
   }
 ]
 
