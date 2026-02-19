@@ -120,9 +120,10 @@ export default function Home() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
     service: '',
     date: '',
+    time: '',
+    address: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -134,28 +135,43 @@ export default function Home() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitMessage('')
 
+    // Validate required fields
+    if (!formData.name || !formData.phone || !formData.service) {
+      setSubmitMessage('Please fill in all required fields (Name, Phone, Service)')
+      setIsSubmitting(false)
+      return
+    }
+
     try {
-      const response = await fetch('/api/booking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
+      // Format WhatsApp message
+      const whatsappMessage = `🙏 Jai Shree Ram 🙏
 
-      const data = await response.json()
+New Booking Request:
 
-      if (response.ok) {
-        setSubmitMessage('Thank you! Your booking request has been received. We will contact you shortly.')
-        setFormData({ name: '', phone: '', email: '', service: '', date: '', message: '' })
-      } else {
-        setSubmitMessage(data.error || 'Something went wrong. Please try again.')
-      }
+Name: ${formData.name}
+Phone: ${formData.phone}
+Puja: ${formData.service}
+Date: ${formData.date || 'Not specified'}
+Time: ${formData.time || 'Not specified'}
+Address: ${formData.address || 'Not specified'}
+Message: ${formData.message || 'None'}`
+
+      // Encode message
+      const encodedMessage = encodeURIComponent(whatsappMessage)
+      
+      // Redirect to WhatsApp
+      window.open(`https://wa.me/919580758639?text=${encodedMessage}`, '_blank')
+      
+      // Show success message and reset form
+      setSubmitMessage('Redirecting to WhatsApp... Please send the message from there.')
+      setFormData({ name: '', phone: '', service: '', date: '', time: '', address: '', message: '' })
     } catch (error) {
-      setSubmitMessage('Failed to submit. Please call us directly.')
+      setSubmitMessage('Failed to open WhatsApp. Please call us directly.')
     } finally {
       setIsSubmitting(false)
     }
