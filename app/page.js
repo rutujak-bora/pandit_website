@@ -727,10 +727,6 @@ Message: ${formData.message || 'None'}`
                         className="border-orange-200 focus:border-orange-400"
                       />
                     </div>
-                        onChange={handleChange}
-                        className="border-orange-200 focus:border-orange-400"
-                      />
-                    </div>
                     <div>
                       <Textarea
                         name="message"
@@ -743,7 +739,7 @@ Message: ${formData.message || 'None'}`
                     </div>
 
                     {submitMessage && (
-                      <div className={`p-4 rounded-lg ${submitMessage.includes('Thank you') ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                      <div className={`p-4 rounded-lg ${submitMessage.includes('Redirecting') ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
                         {submitMessage}
                       </div>
                     )}
