@@ -683,16 +683,6 @@ Message: ${formData.message || 'None'}`
                       />
                     </div>
                     <div>
-                      <Input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="border-orange-200 focus:border-orange-400"
-                      />
-                    </div>
-                    <div>
                       <select
                         name="service"
                         value={formData.service}
@@ -713,6 +703,30 @@ Message: ${formData.message || 'None'}`
                         name="date"
                         placeholder="Preferred Date"
                         value={formData.date}
+                        onChange={handleChange}
+                        className="border-orange-200 focus:border-orange-400"
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="time"
+                        name="time"
+                        placeholder="Preferred Time"
+                        value={formData.time}
+                        onChange={handleChange}
+                        className="border-orange-200 focus:border-orange-400"
+                      />
+                    </div>
+                    <div>
+                      <Textarea
+                        name="address"
+                        placeholder="Full Address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        rows={2}
+                        className="border-orange-200 focus:border-orange-400"
+                      />
+                    </div>
                         onChange={handleChange}
                         className="border-orange-200 focus:border-orange-400"
                       />
