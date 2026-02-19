@@ -167,15 +167,21 @@ Message: ${formData.message || 'None'}`
       // Create WhatsApp URL
       const whatsappUrl = `https://wa.me/919580758639?text=${encodedMessage}`
       
-      // Use location.href instead of window.open to avoid popup blockers
-      window.location.href = whatsappUrl
+      // Create a temporary anchor element and click it (bypasses popup blockers)
+      const link = document.createElement('a')
+      link.href = whatsappUrl
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
       
-      // Note: Form reset and message won't show because page redirects
-      // But we set it anyway for consistency
-      setSubmitMessage('Redirecting to WhatsApp...')
+      // Show success message and reset form
+      setSubmitMessage('Opening WhatsApp... Please send the message from there.')
       setFormData({ name: '', phone: '', service: '', date: '', time: '', address: '', message: '' })
     } catch (error) {
       setSubmitMessage('Failed to open WhatsApp. Please call us directly.')
+    } finally {
       setIsSubmitting(false)
     }
   }
