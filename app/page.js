@@ -377,21 +377,28 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-orange-300 cursor-pointer overflow-hidden">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3 text-4xl">{service.icon}</div>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl group-hover:text-orange-600 transition-colors">{service.title}</CardTitle>
-                  <CardDescription className="text-gray-600">{service.description}</CardDescription>
-                </CardHeader>
-              </Card>
+              <Link key={index} href={`/services/${service.slug}`}>
+                <Card className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-orange-300 cursor-pointer overflow-hidden h-full">
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-3 text-4xl">{service.icon}</div>
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-xl group-hover:text-orange-600 transition-colors">{service.title}</CardTitle>
+                    <CardDescription className="text-gray-600">{service.description}</CardDescription>
+                  </CardHeader>
+                  <div className="px-6 pb-4">
+                    <Button variant="outline" size="sm" className="w-full border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white">
+                      View Details →
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
             ))}
           </div>
 
