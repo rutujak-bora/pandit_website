@@ -137,19 +137,15 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitMessage('')
-
+    
     // Validate required fields
     if (!formData.name || !formData.phone || !formData.service) {
       setSubmitMessage('Please fill in all required fields (Name, Phone, Service)')
-      setIsSubmitting(false)
       return
     }
 
-    try {
-      // Format WhatsApp message
-      const whatsappMessage = `🙏 Jai Shree Ram 🙏
+    // Format WhatsApp message
+    const whatsappMessage = `🙏 Jai Shree Ram 🙏
 
 New Booking Request:
 
@@ -161,29 +157,14 @@ Time: ${formData.time || 'Not specified'}
 Address: ${formData.address || 'Not specified'}
 Message: ${formData.message || 'None'}`
 
-      // Encode message
-      const encodedMessage = encodeURIComponent(whatsappMessage)
-      
-      // Create WhatsApp URL
-      const whatsappUrl = `https://wa.me/919580758639?text=${encodedMessage}`
-      
-      // Create a temporary anchor element and click it (bypasses popup blockers)
-      const link = document.createElement('a')
-      link.href = whatsappUrl
-      link.target = '_blank'
-      link.rel = 'noopener noreferrer'
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      
-      // Show success message and reset form
-      setSubmitMessage('Opening WhatsApp... Please send the message from there.')
-      setFormData({ name: '', phone: '', service: '', date: '', time: '', address: '', message: '' })
-    } catch (error) {
-      setSubmitMessage('Failed to open WhatsApp. Please call us directly.')
-    } finally {
-      setIsSubmitting(false)
-    }
+    // Encode message
+    const encodedMessage = encodeURIComponent(whatsappMessage)
+    
+    // Create WhatsApp URL - using correct phone number 919580758639
+    const whatsappUrl = `https://wa.me/919580758639?text=${encodedMessage}`
+    
+    // Redirect directly to WhatsApp (most reliable method)
+    window.location.href = whatsappUrl
   }
 
   const scrollToSection = (sectionId) => {
