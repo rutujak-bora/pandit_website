@@ -196,17 +196,35 @@ export default function Home() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitMessage('')
     
     // Validate required fields
     if (!formData.name || !formData.phone || !formData.service) {
       setSubmitMessage('Please fill in all required fields (Name, Phone, Service)')
+      setIsSubmitting(false)
       return
     }
 
-    // Format WhatsApp message
-    const whatsappMessage = `🙏 Jai Shree Ram 🙏
+    try {
+      // Save booking to database first
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          email: 'booking@panditjiservices.com', // System email
+          message: formData.message || 'Booking request via website form'
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // Format WhatsApp message
+        const whatsappMessage = `🙏 Jai Shree Ram 🙏
 
 New Booking Request:
 
@@ -216,16 +234,34 @@ Puja: ${formData.service}
 Date: ${formData.date || 'Not specified'}
 Time: ${formData.time || 'Not specified'}
 Address: ${formData.address || 'Not specified'}
-Message: ${formData.message || 'None'}`
+Message: ${formData.message || 'None'}
 
-    // Encode message
-    const encodedMessage = encodeURIComponent(whatsappMessage)
-    
-    // Create WhatsApp URL - using correct phone number 919580758639
-    const whatsappUrl = `https://wa.me/919580758639?text=${encodedMessage}`
-    
-    // Redirect directly to WhatsApp (most reliable method)
-    window.location.href = whatsappUrl
+Booking ID: ${data.bookingId || 'N/A'}`
+
+        // Encode message
+        const encodedMessage = encodeURIComponent(whatsappMessage)
+        
+        // Create WhatsApp URL
+        const whatsappUrl = `https://wa.me/919580758639?text=${encodedMessage}`
+        
+        // Show success message
+        setSubmitMessage('✅ Booking saved! Opening WhatsApp to send details to Pandit Ji...')
+        
+        // Clear form
+        setFormData({ name: '', phone: '', service: '', date: '', time: '', address: '', message: '' })
+        
+        // Redirect to WhatsApp after 2 seconds
+        setTimeout(() => {
+          window.location.href = whatsappUrl
+        }, 2000)
+      } else {
+        setSubmitMessage(data.error || 'Failed to save booking. Please call us directly.')
+      }
+    } catch (error) {
+      setSubmitMessage('Failed to submit booking. Please call us directly at +91 95807 58639')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const scrollToSection = (sectionId) => {
