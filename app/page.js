@@ -300,49 +300,130 @@ Message: ${formData.message || 'None'}`
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section id="home" className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Enhanced Design */}
+      <section id="home" className="relative min-h-[700px] md:min-h-[800px] flex items-center justify-center overflow-hidden">
+        {/* Animated Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-[zoomIn_20s_ease-in-out_infinite_alternate]"
           style={{
             backgroundImage: 'url(https://images.unsplash.com/photo-1703045199207-5312874d9e54)',
-            filter: 'brightness(0.4)'
+            filter: 'brightness(0.35)'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/80 to-red-900/80" />
+        
+        {/* Gradient Overlays for Depth */}
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-900/90 via-red-800/80 to-orange-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30" />
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 opacity-10 animate-spin-slow">
+          <img src="https://images.pexels.com/photos/7181865/pexels-photo-7181865.jpeg" alt="Mandala" className="w-full h-full object-contain" />
+        </div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 opacity-10 animate-spin-slow-reverse">
+          <img src="https://images.pexels.com/photos/7181865/pexels-photo-7181865.jpeg" alt="Mandala" className="w-full h-full object-contain" />
+        </div>
 
-        <div className="relative z-10 container mx-auto px-4 text-center text-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Traditional Vedic Puja Services
-              <br />
-              <span className="text-orange-300">In Delhi NCR</span>
+        {/* Floating Diya Elements */}
+        <div className="absolute top-20 right-1/4 w-16 h-16 opacity-20 animate-float">
+          <span className="text-6xl">🪔</span>
+        </div>
+        <div className="absolute bottom-32 left-1/4 w-16 h-16 opacity-20 animate-float-delayed">
+          <span className="text-6xl">🪔</span>
+        </div>
+
+        {/* Main Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="max-w-5xl mx-auto">
+            {/* Animated Top Badge */}
+            <div className="inline-flex items-center space-x-2 bg-orange-500/20 backdrop-blur-sm border border-orange-300/30 rounded-full px-6 py-2 mb-8 animate-fade-in-down">
+              <span className="text-2xl animate-pulse">🕉️</span>
+              <span className="text-orange-200 font-semibold">Authentic Vedic Rituals</span>
+              <span className="text-2xl animate-pulse">🕉️</span>
+            </div>
+
+            {/* Main Heading with Gradient Text */}
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in">
+              <span className="block text-white drop-shadow-2xl">Traditional Vedic</span>
+              <span className="block bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-300 bg-clip-text text-transparent animate-gradient-x text-6xl md:text-8xl">
+                Puja Services
+              </span>
+              <span className="block text-orange-200 text-3xl md:text-4xl mt-4 font-light">In Delhi NCR</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-orange-100">
-              Experienced Pandit for all Hindu ceremonies • 15+ Years Experience • Authentic Vedic Rituals
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {/* Subtitle with Icons */}
+            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 mb-10 text-orange-100 text-lg md:text-xl animate-fade-in-up">
+              <div className="flex items-center space-x-2">
+                <Award className="w-6 h-6 text-yellow-400" />
+                <span>15+ Years Experience</span>
+              </div>
+              <span className="text-orange-400">•</span>
+              <div className="flex items-center space-x-2">
+                <Users className="w-6 h-6 text-yellow-400" />
+                <span>5000+ Pujas</span>
+              </div>
+              <span className="text-orange-400">•</span>
+              <div className="flex items-center space-x-2">
+                <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
+                <span>4.9 Rating</span>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center animate-fade-in-up-delayed">
               <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto">
-                  <MessageCircle className="w-5 h-5 mr-2" />
+                <Button size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-2xl hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 px-8 py-6 text-lg w-full sm:w-auto">
+                  <MessageCircle className="w-6 h-6 mr-3 animate-bounce" />
                   WhatsApp Booking
                 </Button>
               </a>
-              <a href="tel:+919876543210">
-                <Button size="lg" variant="outline" className="bg-white text-orange-600 hover:bg-orange-50 border-2 border-white w-full sm:w-auto">
-                  <Phone className="w-5 h-5 mr-2" />
-                  Call Now
+              <a href="tel:+919580758639">
+                <Button size="lg" className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white shadow-2xl hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300 px-8 py-6 text-lg w-full sm:w-auto">
+                  <Phone className="w-6 h-6 mr-3" />
+                  Call: +91 95807 58639
                 </Button>
               </a>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="mt-12 flex flex-wrap justify-center gap-6 text-orange-200 text-sm animate-fade-in">
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                <span>Certified Vedic Scholar</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                <span>All Samagri Available</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                <span>Free Muhurat Consultation</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Decorative Bottom Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        {/* Decorative Bottom Wave with Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 z-20">
           <svg viewBox="0 0 1440 120" className="w-full h-auto">
-            <path fill="#fffaf0" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            <defs>
+              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: '#fff5f0', stopOpacity: 1 }} />
+                <stop offset="50%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: '#fff5f0', stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <path fill="url(#waveGradient)" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
           </svg>
+        </div>
+
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+          <div className="flex flex-col items-center text-white/70">
+            <span className="text-sm mb-2">Scroll Down</span>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
       </section>
 
