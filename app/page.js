@@ -126,10 +126,20 @@ export default function Home() {
     address: '',
     message: ''
   })
+  const [reviewForm, setReviewForm] = useState({
+    name: '',
+    rating: 5,
+    review: '',
+    service: ''
+  })
+  const [reviews, setReviews] = useState([])
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const [reviewMessage, setReviewMessage] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [showReviewForm, setShowReviewForm] = useState(false)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
