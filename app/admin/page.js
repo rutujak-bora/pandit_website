@@ -93,14 +93,27 @@ Booking ID: ${booking._id}`
               <p className="text-gray-600">
                 Pandit Sandesh Tiwari - All Customer Bookings
               </p>
+              <p className="text-sm text-gray-500 mt-1">
+                Logged in as: {adminEmail}
+              </p>
             </div>
-            <Button
-              onClick={fetchBookings}
-              className="bg-orange-600 hover:bg-orange-700"
-            >
-              <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-              Refresh
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                onClick={fetchBookings}
+                className="bg-orange-600 hover:bg-orange-700"
+              >
+                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="border-red-600 text-red-600 hover:bg-red-50"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
           </div>
           
           <div className="bg-orange-100 border-l-4 border-orange-600 p-4 rounded-r-lg">
