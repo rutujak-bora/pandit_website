@@ -1070,7 +1070,7 @@ Booking ID: ${data.bookingId || 'N/A'}`
                 <li><button onClick={() => scrollToSection('contact')} className="text-gray-400 hover:text-orange-400 transition-colors">Contact</button></li>
                 <li>
                   <Link href="/admin/login" className="text-gray-400 hover:text-orange-400 transition-colors">
-                    Admin
+                    Admin Login
                   </Link>
                 </li>
               </ul>
