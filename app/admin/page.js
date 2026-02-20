@@ -1,18 +1,39 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Phone, Calendar, Clock, MapPin, MessageCircle, RefreshCw } from 'lucide-react'
+import { Phone, Calendar, Clock, MapPin, MessageCircle, RefreshCw, LogOut } from 'lucide-react'
 
 export default function AdminDashboard() {
+  const router = useRouter()
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(true)
   const [lastRefresh, setLastRefresh] = useState(new Date())
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [adminEmail, setAdminEmail] = useState('')
 
   useEffect(() => {
-    fetchBookings()
+    // Check authentication
+    const authStatus = localStorage.getItem('adminAuth')
+    const email = localStorage.getItem('adminEmail')
+    
+    if (authStatus === 'true' && email) {
+      setIsAuthenticated(true)
+      setAdminEmail(email)
+      fetchBookings()
+    } else {
+      // Redirect to login
+      router.push('/admin/login')
+    }
   }, [])
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminAuth')
+    localStorage.removeItem('adminEmail')
+    router.push('/admin/login')
+  }
 
   const fetchBookings = async () => {
     setLoading(true)
