@@ -101,6 +101,12 @@ Booking ID: ${booking._id}`
               </p>
             </div>
             <div className="flex gap-3">
+              <Link href="/">
+                <Button variant="outline" className="border-gray-300">
+                  <Home className="w-4 h-4 mr-2" />
+                  Home
+                </Button>
+              </Link>
               <Button
                 onClick={fetchBookings}
                 className="bg-orange-600 hover:bg-orange-700"
