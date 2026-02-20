@@ -145,6 +145,57 @@ export default function Home() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const handleReviewChange = (e) => {
+    setReviewForm({ ...reviewForm, [e.target.name]: e.target.value })
+  }
+
+  // Fetch reviews on component mount
+  useEffect(() => {
+    fetchReviews()
+  }, [])
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch('/api/reviews')
+      const data = await response.json()
+      if (data.success) {
+        setReviews(data.reviews)
+      }
+    } catch (error) {
+      console.error('Failed to fetch reviews:', error)
+    }
+  }
+
+  const handleReviewSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmittingReview(true)
+    setReviewMessage('')
+
+    try {
+      const response = await fetch('/api/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reviewForm)
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setReviewMessage('Thank you! Your review has been submitted successfully.')
+        setReviewForm({ name: '', rating: 5, review: '', service: '' })
+        setShowReviewForm(false)
+        // Refresh reviews
+        fetchReviews()
+      } else {
+        setReviewMessage(data.error || 'Failed to submit review. Please try again.')
+      }
+    } catch (error) {
+      setReviewMessage('Failed to submit review. Please try again.')
+    } finally {
+      setIsSubmittingReview(false)
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     
