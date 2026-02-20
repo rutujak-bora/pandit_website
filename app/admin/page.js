@@ -83,6 +83,23 @@ Booking ID: ${booking._id}`
     })
   }
 
+  // Show loading while checking authentication
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+          <p className="mt-4 text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (!isAuthenticated) {
+    return null
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white py-8">
       <div className="container mx-auto px-4">
