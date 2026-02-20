@@ -253,6 +253,10 @@ export async function GET(request) {
     return getBookings()
   }
 
+  if (path === '/reviews') {
+    return getReviews()
+  }
+
   return NextResponse.json(
     { error: 'Endpoint not found' },
     { status: 404 }
@@ -265,6 +269,10 @@ export async function POST(request) {
 
   if (path === '/booking') {
     return handleBooking(request)
+  }
+
+  if (path === '/review' || path === '/reviews') {
+    return handleReviewSubmit(request)
   }
 
   return NextResponse.json(
