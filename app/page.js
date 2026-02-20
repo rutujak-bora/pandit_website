@@ -1068,6 +1068,11 @@ Booking ID: ${data.bookingId || 'N/A'}`
                 <li><button onClick={() => scrollToSection('about')} className="text-gray-400 hover:text-orange-400 transition-colors">About</button></li>
                 <li><button onClick={() => scrollToSection('services')} className="text-gray-400 hover:text-orange-400 transition-colors">Services</button></li>
                 <li><button onClick={() => scrollToSection('contact')} className="text-gray-400 hover:text-orange-400 transition-colors">Contact</button></li>
+                <li>
+                  <Link href="/admin/login" className="text-gray-400 hover:text-orange-400 transition-colors">
+                    Admin
+                  </Link>
+                </li>
               </ul>
             </div>
 
