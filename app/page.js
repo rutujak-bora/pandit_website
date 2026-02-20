@@ -542,33 +542,150 @@ Message: ${formData.message || 'None'}`
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Customer Reviews Section */}
       <section id="testimonials" className="py-20 bg-gradient-to-b from-orange-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              What Our <span className="text-orange-600">Clients Say</span>
+              Customer <span className="text-orange-600">Reviews</span>
             </h2>
-            <p className="text-xl text-gray-600">Real experiences from satisfied families</p>
+            <p className="text-xl text-gray-600 mb-6">Real experiences from our satisfied clients</p>
+            
+            <Button 
+              onClick={() => setShowReviewForm(!showReviewForm)}
+              className="bg-orange-600 hover:bg-orange-700"
+              size="lg"
+            >
+              {showReviewForm ? 'Hide Review Form' : 'Write a Review'}
+            </Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="hover:shadow-xl transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center space-x-1 mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
-                    ))}
-                  </div>
-                  <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                  <CardDescription className="text-sm">{testimonial.location}</CardDescription>
+          {/* Review Submission Form */}
+          {showReviewForm && (
+            <div className="max-w-2xl mx-auto mb-12">
+              <Card className="border-2 border-orange-200 shadow-xl">
+                <CardHeader className="bg-gradient-to-br from-orange-50 to-red-50">
+                  <CardTitle className="text-2xl">Share Your Experience</CardTitle>
+                  <CardDescription>Help others by sharing your experience with Pandit Ji services</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 italic">"{testimonial.text}"</p>
+                <CardContent className="pt-6">
+                  <form onSubmit={handleReviewSubmit} className="space-y-4">
+                    <div>
+                      <Input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name *"
+                        value={reviewForm.name}
+                        onChange={handleReviewChange}
+                        required
+                        className="border-orange-200 focus:border-orange-400"
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Rating *
+                      </label>
+                      <div className="flex items-center space-x-2">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            type="button"
+                            onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                            className="focus:outline-none"
+                          >
+                            <Star
+                              className={`w-8 h-8 ${
+                                star <= reviewForm.rating
+                                  ? 'fill-orange-500 text-orange-500'
+                                  : 'text-gray-300'
+                              }`}
+                            />
+                          </button>
+                        ))}
+                        <span className="ml-3 text-gray-700">({reviewForm.rating} stars)</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <select
+                        name="service"
+                        value={reviewForm.service}
+                        onChange={handleReviewChange}
+                        className="w-full px-3 py-2 border border-orange-200 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+                      >
+                        <option value="">Which service did you receive?</option>
+                        {services.map((service, index) => (
+                          <option key={index} value={service.title}>{service.title}</option>
+                        ))}
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <Textarea
+                        name="review"
+                        placeholder="Write your review here... *"
+                        value={reviewForm.review}
+                        onChange={handleReviewChange}
+                        required
+                        rows={4}
+                        className="border-orange-200 focus:border-orange-400"
+                      />
+                    </div>
+
+                    {reviewMessage && (
+                      <div className={`p-4 rounded-lg ${reviewMessage.includes('Thank you') ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                        {reviewMessage}
+                      </div>
+                    )}
+
+                    <Button
+                      type="submit"
+                      disabled={isSubmittingReview}
+                      className="w-full bg-orange-600 hover:bg-orange-700"
+                      size="lg"
+                    >
+                      {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                    </Button>
+                  </form>
                 </CardContent>
               </Card>
-            ))}
+            </div>
+          )}
+
+          {/* Reviews Display */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {reviews.length > 0 ? (
+              reviews.map((review) => (
+                <Card key={review.id} className="hover:shadow-xl transition-shadow">
+                  <CardHeader>
+                    <div className="flex items-center space-x-1 mb-3">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-orange-500 text-orange-500" />
+                      ))}
+                    </div>
+                    <CardTitle className="text-lg">{review.name}</CardTitle>
+                    <CardDescription className="text-sm">
+                      {review.service && <span className="text-orange-600">{review.service}</span>}
+                      {review.service && ' • '}
+                      {new Date(review.date).toLocaleDateString('en-IN', { 
+                        day: 'numeric', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      })}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700 italic">"{review.review}"</p>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-gray-500 text-lg">No reviews yet. Be the first to share your experience!</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
