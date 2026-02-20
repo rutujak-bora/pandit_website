@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Phone, Calendar, Clock, MapPin, MessageCircle, RefreshCw, LogOut } from 'lucide-react'
+import { Phone, Calendar, Clock, MapPin, MessageCircle, RefreshCw, LogOut, Home } from 'lucide-react'
+import Link from 'next/link'
 
 export default function AdminDashboard() {
   const router = useRouter()
@@ -12,21 +13,23 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
   const [lastRefresh, setLastRefresh] = useState(new Date())
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [adminEmail, setAdminEmail] = useState('')
+  const [adminUsername, setAdminUsername] = useState('')
+  const [checkingAuth, setCheckingAuth] = useState(true)
 
   useEffect(() => {
     // Check authentication
     const authStatus = localStorage.getItem('adminAuth')
-    const email = localStorage.getItem('adminEmail')
+    const username = localStorage.getItem('adminEmail')
     
-    if (authStatus === 'true' && email) {
+    if (authStatus === 'true' && username) {
       setIsAuthenticated(true)
-      setAdminEmail(email)
+      setAdminUsername(username)
       fetchBookings()
     } else {
       // Redirect to login
       router.push('/admin/login')
     }
+    setCheckingAuth(false)
   }, [])
 
   const handleLogout = () => {
