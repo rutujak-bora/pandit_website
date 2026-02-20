@@ -97,7 +97,7 @@ Booking ID: ${booking._id}`
                 Pandit Sandesh Tiwari - All Customer Bookings
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                Logged in as: {adminEmail}
+                Logged in as: <span className="font-medium text-orange-600">{adminUsername}</span>
               </p>
             </div>
             <div className="flex gap-3">
