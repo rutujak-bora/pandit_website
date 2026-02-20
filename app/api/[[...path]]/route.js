@@ -93,6 +93,99 @@ async function handleBooking(request) {
   }
 }
 
+// POST /api/reviews - Submit customer review
+async function handleReviewSubmit(request) {
+  try {
+    const body = await request.json()
+    const { name, rating, review, service } = body
+
+    // Validation
+    if (!name || !rating || !review) {
+      return NextResponse.json(
+        { error: 'Name, rating, and review are required' },
+        { status: 400 }
+      )
+    }
+
+    // Rating validation
+    const ratingNum = parseInt(rating)
+    if (isNaN(ratingNum) || ratingNum < 1 || ratingNum > 5) {
+      return NextResponse.json(
+        { error: 'Rating must be between 1 and 5' },
+        { status: 400 }
+      )
+    }
+
+    const client = await connectToDatabase()
+    const db = client.db(DB_NAME)
+    const reviewsCollection = db.collection('reviews')
+
+    const newReview = {
+      name,
+      rating: ratingNum,
+      review,
+      service: service || 'General',
+      approved: true, // Auto-approve for now
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+
+    const result = await reviewsCollection.insertOne(newReview)
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Review submitted successfully',
+        reviewId: result.insertedId
+      },
+      { status: 201 }
+    )
+  } catch (error) {
+    console.error('Review submission error:', error)
+    return NextResponse.json(
+      { error: 'Failed to submit review' },
+      { status: 500 }
+    )
+  }
+}
+
+// GET /api/reviews - Get all approved reviews
+async function getReviews() {
+  try {
+    const client = await connectToDatabase()
+    const db = client.db(DB_NAME)
+    const reviewsCollection = db.collection('reviews')
+
+    const reviews = await reviewsCollection
+      .find({ approved: true })
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .toArray()
+
+    // Format reviews with proper date
+    const formattedReviews = reviews.map(review => ({
+      id: review._id.toString(),
+      name: review.name,
+      rating: review.rating,
+      review: review.review,
+      service: review.service,
+      date: review.createdAt.toISOString()
+    }))
+
+    return NextResponse.json({
+      success: true,
+      count: formattedReviews.length,
+      reviews: formattedReviews
+    })
+  } catch (error) {
+    console.error('Get reviews error:', error)
+    return NextResponse.json(
+      { error: 'Failed to fetch reviews' },
+      { status: 500 }
+    )
+  }
+}
+
 // GET /api/bookings - Get all bookings (optional admin feature)
 async function getBookings() {
   try {
