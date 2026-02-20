@@ -36,7 +36,7 @@ export const metadata = {
     // google: 'your-verification-code'
   },
   alternates: {
-    canonical: 'https://sacred-booking-site.preview.emergentagent.com'
+    canonical: 'https://pandit-booking-7.preview.emergentagent.com'
   }
 }
 
@@ -58,8 +58,8 @@ export default function RootLayout({ children }) {
               name: 'Pandit Ji Services',
               description: 'Professional Hindu priest services for all Vedic ceremonies and pujas',
               image: 'https://images.unsplash.com/photo-1703045199207-5312874d9e54',
-              '@id': 'https://sacred-booking-site.preview.emergentagent.com',
-              url: 'https://sacred-booking-site.preview.emergentagent.com',
+              '@id': 'https://pandit-booking-7.preview.emergentagent.com',
+              url: 'https://pandit-booking-7.preview.emergentagent.com',
               telephone: '+919876543210',
               email: 'contact@panditjiservices.com',
               address: {

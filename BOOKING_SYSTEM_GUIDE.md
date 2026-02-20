@@ -5,7 +5,7 @@
 ### Method 1: Website Booking Form (RECOMMENDED) ✅
 
 **Customer Experience:**
-1. Customer visits: https://sacred-booking-site.preview.emergentagent.com/#contact
+1. Customer visits: https://pandit-booking-7.preview.emergentagent.com/#contact
 2. Fills booking form with:
    - Name *
    - Phone Number *
@@ -33,7 +33,7 @@
 
 **Admin Dashboard URL:**
 ```
-https://sacred-booking-site.preview.emergentagent.com/admin
+https://pandit-booking-7.preview.emergentagent.com/admin
 ```
 
 **Features:**
@@ -131,7 +131,7 @@ Customers can call:
 ### Daily Routine:
 
 **Morning:**
-1. Open admin dashboard: https://sacred-booking-site.preview.emergentagent.com/admin
+1. Open admin dashboard: https://pandit-booking-7.preview.emergentagent.com/admin
 2. Click "Refresh" to see new bookings
 3. Review all pending bookings
 4. Click "Call" button to contact customers
@@ -195,7 +195,7 @@ Customers can call:
 
 **URL to Bookmark:**
 ```
-https://sacred-booking-site.preview.emergentagent.com/admin
+https://pandit-booking-7.preview.emergentagent.com/admin
 ```
 
 ---

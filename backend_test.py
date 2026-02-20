@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 
 # Get the base URL from environment
-BASE_URL = "https://sacred-booking-site.preview.emergentagent.com/api"
+BASE_URL = "https://pandit-booking-7.preview.emergentagent.com/api"
 
 class PanditBookingAPITest:
     def __init__(self):
